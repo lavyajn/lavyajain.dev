@@ -9,27 +9,29 @@ const SystemView = ({ systemId }) => {
     <div className="w-full max-w-7xl mx-auto font-mono pb-20 animate-in fade-in duration-500">
       
       {/* Header Block */}
-      <div className="border border-gray-700 bg-[#0a0a0a] p-8 mb-8 shadow-sm relative">
+      <div className="border border-gray-700 bg-[#0a0a0a] p-6 md:p-8 mb-8 shadow-sm">
         
-        {/* GitHub Link positioned top right */}
-        <a 
-          href={data.links.github} 
-          target="_blank" 
-          rel="noreferrer"
-          className={`absolute top-8 right-8 border border-gray-700 px-3 py-1 text-xs text-gray-400 transition-colors ${data.hoverBg} hover:${data.color}`}
-        >
-          [ GITHUB_REPOSITORY ]
-        </a>
-
-        <div className="flex justify-between items-start mb-6 border-b border-gray-700 pb-6 pr-40">
+        {/* Responsive Flex Container: Stacks vertically on mobile, horizontally on md screens */}
+        <div className="flex flex-col md:flex-row justify-between items-start gap-6 mb-6 border-b border-gray-700 pb-6">
           <div>
-            <h1 className="text-4xl font-bold tracking-widest mb-2 text-white">
+            <h1 className="text-3xl md:text-4xl font-bold tracking-widest mb-2 text-white">
               {data.name}
             </h1>
             <h2 className={`text-sm tracking-widest uppercase ${data.color}`}>
               {data.tagline}
             </h2>
           </div>
+          
+          {data.links?.github && (
+            <a 
+              href={data.links.github} 
+              target="_blank" 
+              rel="noreferrer"
+              className={`border border-gray-700 px-4 py-2 text-xs text-gray-400 transition-colors ${data.hoverBg} hover:${data.color} self-start whitespace-nowrap`}
+            >
+              [ GITHUB_REPOSITORY ]
+            </a>
+          )}
         </div>
 
         {/* Metrics Grid */}
