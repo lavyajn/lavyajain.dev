@@ -37,7 +37,8 @@ const Sidebar = () => {
       >
         <h1 className="text-xl font-bold tracking-widest text-white group-hover:text-gray-300 transition-colors">/SYSTEMS</h1>
         <div className="flex items-center justify-between mt-2">
-          <p className="text-xs text-gray-500">DIRECTORY_ACCESS_GRANTED</p>
+          {/* BUMPED: text-gray-500 -> text-gray-400 */}
+          <p className="text-xs text-gray-400">DIRECTORY_ACCESS_GRANTED</p>
           {!activeSystem && <span className="text-xs text-green-500 animate-pulse">ROOT</span>}
         </div>
       </div>
@@ -63,14 +64,16 @@ const Sidebar = () => {
               </div>
               
               {/* Description */}
-              <div className="text-xs text-gray-500 mb-3 transition-colors duration-300 group-hover:text-gray-400">
+              {/* BUMPED: text-gray-500 -> text-gray-400, hover to gray-300 */}
+              <div className="text-xs text-gray-400 mb-3 transition-colors duration-300 group-hover:text-gray-300">
                 {sys.desc}
               </div>
               
               {/* Status Indicator */}
               <div className="text-xs flex items-center gap-3">
-                <span className="text-gray-600">STATUS</span>
-                <div className={`flex items-center gap-2 ${isActive ? 'text-white' : 'text-gray-500'}`}>
+                {/* BUMPED: text-gray-600 -> text-gray-400 for better visibility */}
+                <span className="text-gray-400">STATUS</span>
+                <div className={`flex items-center gap-2 ${isActive ? 'text-white' : 'text-gray-400'}`}>
                   <span className={`w-2 h-2 rounded-full transition-all duration-300 ${
                     isActive ? `${sys.indicator} animate-pulse shadow-[0_0_8px_currentColor]` : 'bg-gray-600 group-hover:bg-gray-400'
                   }`}></span>
@@ -88,10 +91,13 @@ const Sidebar = () => {
       {/* Footer Info */}
       <div className="p-4 border-t border-gray-800 text-xs flex flex-col gap-3 bg-[#050505]">
         <div className="flex justify-between items-center">
-          <span className="text-gray-500">USR: L.JAIN</span>
-          <span className="text-blue-500/70 tracking-widest">OP: SYS_ENG</span>
+          {/* BUMPED: text-gray-500 -> text-gray-400 */}
+          <span className="text-gray-400">USR: L.JAIN</span>
+          {/* BUMPED: text-blue-500/70 -> text-blue-400 */}
+          <span className="text-blue-400 tracking-widest">OP: SYS_ENG</span>
         </div>
-        <div className="text-[10px] text-gray-200/50 text-center border-t border-gray-800/50 pt-2 animate-pulse">
+        {/* BUMPED: text-gray-200/50 -> text-gray-400 */}
+        <div className="text-[10px] text-gray-400 text-center border-t border-gray-800/50 pt-2 animate-pulse">
           [ TYPE 'HELP' ANYWHERE FOR TERMINAL ]
         </div>
       </div>
