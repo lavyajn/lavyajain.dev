@@ -1,6 +1,9 @@
 import React from 'react';
+import useAppStore from '../store/useAppStore';
 
 const Home = () => {
+    const { setActiveSystem } = useAppStore();
+    
   return (
     <div className="w-full max-w-4xl font-mono pb-20 animate-in fade-in duration-500">
       
@@ -55,11 +58,20 @@ const Home = () => {
             // DIRECTIVES
           </h3>
           <div className="space-y-4">
-            <button className="w-full flex justify-between items-center px-4 py-3 border border-gray-700 bg-[#050505] hover:bg-green-900/20 hover:border-green-500 transition-all text-sm text-gray-200 group">
-              <span>DOWNLOAD_RESUME.pdf</span>
-              <span className="text-gray-500 group-hover:text-green-500">↓</span>
+            
+            {/* Update this button with the onClick handler */}
+            <button 
+              onClick={() => setActiveSystem('resume')}
+              className="w-full flex justify-between items-center px-4 py-3 border border-gray-700 bg-[#050505] hover:bg-green-900/20 hover:border-green-500 transition-all text-sm text-gray-200 group"
+            >
+              <span>VIEW_OPERATOR_PROFILE</span>
+              <span className="text-gray-500 group-hover:text-green-500">→</span>
             </button>
-            <button className="w-full flex justify-between items-center px-4 py-3 border border-gray-700 bg-[#050505] hover:bg-blue-900/20 hover:border-blue-500 transition-all text-sm text-gray-200 group">
+
+            <button 
+              onClick={() => setActiveSystem('contact')}
+              className="w-full flex justify-between items-center px-4 py-3 border border-gray-700 bg-[#050505] hover:bg-blue-900/20 hover:border-blue-500 transition-all text-sm text-gray-200 group"
+            >
               <span>INITIATE_CONTACT</span>
               <span className="text-gray-500 group-hover:text-blue-500">→</span>
             </button>
