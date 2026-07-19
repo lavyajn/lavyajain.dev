@@ -52,27 +52,39 @@ const SystemView = ({ systemId }) => {
         </div>
       </div>
 
-      {/* Media Viewer (GIFs) */}
-      <div className={`w-full border ${data.border} bg-[#050505] mb-8 relative group overflow-hidden min-h-[400px] flex flex-col`}>
-         <div className={`absolute inset-0 opacity-5 ${data.bg} pointer-events-none`}></div>
-         
-         <div className="flex-1 flex items-center justify-center bg-black">
-           <img 
-             src={data.mediaPath} 
-             alt={`${data.name} interface`}
-             className="w-full h-full object-contain"
-             onError={(e) => { 
-               e.target.onerror = null; // Prevent infinite loops
-               e.target.style.display = 'none';
-               e.target.parentNode.innerHTML = `<div class="text-red-500 text-xs tracking-widest">[ ASSET_NOT_FOUND: ${data.mediaPath} ]</div>`;
-             }}
-           />
-         </div>
-         
-         <div className="p-2 text-xs text-gray-500 flex justify-between items-center bg-[#0a0a0a] border-t border-gray-800">
-           <span>LIVE_FEED_SIMULATION</span>
-           <span className={`${data.color}`}>SIGNAL_LOCK</span>
-         </div>
+      {/* Media Rendering Container */}
+      <div className={`w-full border border-gray-800 bg-black mb-8 flex justify-center items-center relative overflow-hidden group ${
+        data.media?.orientation === 'portrait' ? 'py-8' : ''
+      }`}>
+        
+        {/* Fallback pattern if no media is loaded yet */}
+        {!data.media?.url && (
+          <div className="absolute inset-0 bg-[linear-gradient(rgba(0,255,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,255,0,0.02)_1px,transparent_1px)] bg-[size:20px_20px]"></div>
+        )}
+
+        {data.media?.url ? (
+          data.media.type === 'video' ? (
+            <video 
+              src={data.media.url}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className={`block ${data.media.orientation === 'portrait' ? 'h-[600px] w-auto border border-gray-800 rounded-xl' : 'w-full h-auto'}`}
+            />
+          ) : (
+            <img 
+              src={data.media.url} 
+              alt={`${data.name} demonstration`}
+              className={`block ${data.media.orientation === 'portrait' ? 'h-[600px] w-auto border border-gray-800 rounded-xl' : 'w-full h-auto'}`}
+            />
+          )
+        ) : (
+          <div className="h-[400px] text-gray-600 tracking-widest text-sm z-10 flex flex-col items-center justify-center">
+            <span className="mb-2 opacity-50">[ MEDIA_FEED_OFFLINE ]</span>
+            <span>AWAITING_VISUAL_TELEMETRY</span>
+          </div>
+        )}
       </div>
 
       {/* Engineering Text */}

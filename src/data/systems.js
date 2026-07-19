@@ -8,7 +8,11 @@ export const systemsData = {
     border: 'border-green-500',
     bg: 'bg-green-500',
     hoverBg: 'hover:bg-green-900/30',
-    mediaPath: './assets/sanrakshan_demo.gif', // Put your GIF in public/assets/
+   media: {
+      type: 'image', 
+      url: '/assets/sanrakshan_demo.gif',
+      orientation: 'landscape' 
+    },
     metrics: { 
       category: 'Concurrent Simulation', 
       languages: 'C++17, JS', 
@@ -16,7 +20,7 @@ export const systemsData = {
       networking: 'WebSockets' 
     },
     overview: 'A real-time railway traffic control simulator modeling an operational network where multiple trains execute concurrently as independent threads competing for shared tracks.',
-    links: { github: 'https://github.com/yourusername/SANRAKSHAN' },
+    links: { github: 'https://github.com/lavyajn/Sanrakshan-Centralized-Traffic-Control' },
     engineering: [
       { 
         title: 'Thread Synchronization', 
@@ -41,7 +45,11 @@ export const systemsData = {
     border: 'border-blue-500',
     bg: 'bg-blue-500',
     hoverBg: 'hover:bg-blue-900/30',
-    mediaPath: '/assets/vajra_demo.gif',
+   media: {
+      type: 'image', // 'image' for gifs/pngs, 'video' for mp4s
+      url: '/assets/vajra_demo.gif',
+      orientation: 'landscape' // 'landscape' or 'portrait'
+    },
     metrics: { 
       category: 'Digital Twin', 
       languages: 'C++, React', 
@@ -49,7 +57,7 @@ export const systemsData = {
       visualization: 'R3F' 
     },
     overview: 'A real-time cyber-physical digital twin simulating a smart electrical grid capable of predicting, visualizing, and mitigating ICS attacks before physical infrastructure fails.',
-    links: { github: 'https://github.com/yourusername/Vajra' },
+    links: { github: 'https://github.com/lavyajn/Vajra' },
     engineering: [
       { 
         title: 'Deterministic Physics Engine', 
@@ -74,7 +82,11 @@ export const systemsData = {
     border: 'border-purple-500',
     bg: 'bg-purple-500',
     hoverBg: 'hover:bg-purple-900/30',
-    mediaPath: '/assets/verifind_demo.gif',
+    media: {
+      type: 'video',
+      url: '/assets/verifind_demo.gif',
+      orientation: 'portrait'
+    },
     metrics: { 
       category: 'Decentralized Ledger', 
       stack: 'React Native, Express', 
@@ -82,7 +94,7 @@ export const systemsData = {
       storage: 'IPFS, MongoDB' 
     },
     overview: 'A decentralized ownership verification platform creating an immutable history for electronic devices using blockchain infrastructure, QR verification, and IPFS storage.',
-    links: { github: 'https://github.com/yourusername/verifind' },
+    links: { github: 'https://github.com/lavyajn/VeriFind' },
     engineering: [
       { 
         title: 'Gasless Meta-Transactions', 
@@ -107,7 +119,11 @@ export const systemsData = {
     border: 'border-orange-500',
     bg: 'bg-orange-500',
     hoverBg: 'hover:bg-orange-900/30',
-    mediaPath: '/assets/seismic_demo.gif',
+    media: {
+      type: 'image',
+      url: '/assets/seismic_demo.gif',
+      orientation: 'landscape'
+    },
     metrics: { 
       category: 'Geospatial Intelligence', 
       stack: 'React, Node.js', 
@@ -115,7 +131,7 @@ export const systemsData = {
       data: 'Live USGS Stream' 
     },
     overview: 'A tactical 3D earthquake visualization platform transforming raw USGS seismic feeds into an interactive global command center rendered on a WebGL globe.',
-    links: { github: 'https://github.com/yourusername/seismic.net' },
+    links: { github: 'https://github.com/lavyajn/seismic-visualizer' },
     engineering: [
       { 
         title: 'Real-Time Data Pipeline', 
