@@ -3,17 +3,37 @@ import useAppStore from '../store/useAppStore';
 
 const Contact = () => {
   const { setActiveSystem } = useAppStore();
-  const [transmitStatus, setTransmitStatus] = useState('IDLE'); // IDLE, SENDING, SUCCESS
+  const [transmitStatus, setTransmitStatus] = useState('IDLE'); 
 
-  const handleTransmit = (e) => {
+  const handleTransmit = async (e) => {
     e.preventDefault();
     setTransmitStatus('SENDING');
     
-    // Simulate network latency for the UI effect
-    setTimeout(() => {
-      setTransmitStatus('SUCCESS');
-      setTimeout(() => setTransmitStatus('IDLE'), 3000);
-    }, 1200);
+    // Package the form data
+    const formData = new FormData(e.target);
+    formData.append("access_key", import.meta.env.VITE_WEB3FORMS_ACCESS_KEY);
+
+    try {
+      // Execute the POST request to the mail gateway
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+
+      if (res.ok) {
+        setTransmitStatus('SUCCESS');
+        e.target.reset(); // Clear the form on success
+      } else {
+        console.error("Transmission rejected by gateway.");
+        setTransmitStatus('IDLE');
+      }
+    } catch (error) {
+      console.error("Uplink failure:", error);
+      setTransmitStatus('IDLE');
+    }
+
+    // Reset UI state after 3 seconds
+    setTimeout(() => setTransmitStatus('IDLE'), 3000);
   };
 
   return (
@@ -53,6 +73,7 @@ const Contact = () => {
               <label className="text-xs text-gray-500 tracking-widest block">IDENTIFIER (NAME)</label>
               <input 
                 type="text" 
+                name="name" // REQUIRED for formData
                 required
                 className="w-full bg-black border border-gray-800 text-gray-200 px-4 py-2 focus:outline-none focus:border-blue-500 transition-colors"
                 placeholder="Enter designation..."
@@ -62,6 +83,7 @@ const Contact = () => {
               <label className="text-xs text-gray-500 tracking-widest block">RETURN_VECTOR (EMAIL)</label>
               <input 
                 type="email" 
+                name="email" // REQUIRED for formData
                 required
                 className="w-full bg-black border border-gray-800 text-gray-200 px-4 py-2 focus:outline-none focus:border-blue-500 transition-colors"
                 placeholder="Enter return address..."
@@ -72,6 +94,7 @@ const Contact = () => {
           <div className="space-y-2">
             <label className="text-xs text-gray-500 tracking-widest block">PAYLOAD (MESSAGE)</label>
             <textarea 
+              name="message" // REQUIRED for formData
               required
               rows={6}
               className="w-full bg-black border border-gray-800 text-gray-200 px-4 py-2 focus:outline-none focus:border-blue-500 transition-colors resize-none"
