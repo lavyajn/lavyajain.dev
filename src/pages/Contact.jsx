@@ -113,7 +113,7 @@ const Contact = () => {
                 : 'bg-black border-gray-700 hover:border-blue-500 hover:bg-blue-900/10 text-gray-200'
             }`}
           >
-            {transmitStatus === 'IDLE' && 'AUTHORIZE_TRANSMISSION'}
+            {transmitStatus === 'IDLE' && 'INITIATE_TRANSMISSION'}
             {transmitStatus === 'SENDING' && 'ENCRYPTING_AND_ROUTING...'}
             {transmitStatus === 'SUCCESS' && 'PAYLOAD_DELIVERED'}
           </button>

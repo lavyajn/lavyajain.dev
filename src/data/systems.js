@@ -34,7 +34,29 @@ export const systemsData = {
         title: 'Event-Driven Engine', 
         content: 'A Crow C++ server manages routing, scheduling, and telemetry updates, broadcasting the live system state to a persistent WebSocket dashboard.' 
       }
-    ]
+    ],
+      decisions: [
+    {
+      question: "Why std::try_lock() instead of std::lock() for track allocation?",
+      answer:
+        "A blocking lock would stall the train thread whenever a track segment was occupied, preventing timely decision making. Using try_lock() allows trains to immediately detect contention, attempt alternate routes, or wait safely without freezing the simulation, closely modeling real-world dispatch behavior."
+    },
+    {
+      question: "Why WebSockets instead of REST for the dispatcher dashboard?",
+      answer:
+        "The control panel continuously streams train positions, signal states, and telemetry. Polling through REST would introduce unnecessary latency and network overhead. WebSockets provide persistent bidirectional communication, allowing the UI to receive updates instantly as the simulation evolves."
+    },
+    {
+      question: "Why represent the railway as a graph?",
+      answer:
+        "A graph naturally models stations as vertices and tracks as weighted edges, enabling efficient route computation using Dijkstra's algorithm while supporting dynamic rerouting during track failures, wildlife restrictions, or emergency situations."
+    },
+    {
+      question: "Why include a deliberate deadlock demonstration?",
+      answer:
+        "Rather than only preventing deadlocks, I wanted to visualize how they occur. The demonstration recreates circular wait conditions inspired by the Dining Philosophers problem, making operating system synchronization concepts observable in a real-time simulation."
+    }
+  ]
   },
   vajra: {
     id: 'vajra',
@@ -71,7 +93,29 @@ export const systemsData = {
         title: 'ZeroMQ Telemetry Bridge', 
         content: 'Custom Node.js bridge translating native C++ JSON telemetry to browser WebSockets, achieving sub-100ms communication latency to the 3D command center.' 
       }
-    ]
+    ],
+      decisions: [
+    {
+      question: "Why build the simulation engine in C++ instead of JavaScript?",
+      answer:
+        "The simulation performs high-frequency updates involving graph traversal, load redistribution, and anomaly detection. C++ provides deterministic performance, predictable memory management, and lower execution overhead than a browser-based implementation."
+    },
+    {
+      question: "Why use ZeroMQ between the C++ engine and the frontend?",
+      answer:
+        "ZeroMQ decouples the native simulation engine from the visualization layer while providing lightweight publish-subscribe messaging. This architecture allows the simulation to remain independent of the UI and simplifies future scaling or replacement of individual components."
+    },
+    {
+      question: "Why create a digital twin instead of visualizing static data?",
+      answer:
+        "A digital twin enables infrastructure behavior to be simulated before failures occur. Rather than displaying historical telemetry, the system predicts cascading failures, evaluates attack impact, and visualizes defensive responses in real time."
+    },
+    {
+      question: "Why model attacks instead of only detecting anomalies?",
+      answer:
+        "Understanding infrastructure resilience requires observing system behavior under realistic threats. Simulating false data injection, DDoS, and packet spoofing allowed defensive algorithms to be validated against repeatable attack scenarios."
+    }
+  ]
   },
   verifind: {
     id: 'verifind',
@@ -108,7 +152,29 @@ export const systemsData = {
         title: 'Cryptographic Validation', 
         content: 'Restricts sensitive actions, including transfers and BOLO (Be On Look Out) alerts, exclusively to the wallet cryptographically linked to the registered device.' 
       }
-    ]
+    ],
+      decisions: [
+    {
+      question: "Why combine blockchain with MongoDB instead of using only blockchain?",
+      answer:
+        "Blockchain guarantees immutable ownership records but is inefficient for frequent application queries. MongoDB acts as an indexed cache for fast lookups while the blockchain remains the single source of truth for ownership verification."
+    },
+    {
+      question: "Why implement gasless meta-transactions?",
+      answer:
+        "Most users should not need cryptocurrency simply to register or verify ownership. A relayer submits transactions on behalf of users, improving accessibility while preserving cryptographic security."
+    },
+    {
+      question: "Why use ERC-721 instead of a centralized ownership database?",
+      answer:
+        "ERC-721 provides publicly verifiable, tamper-resistant ownership records that cannot be modified by a central authority. This creates a permanent ownership chain for every registered device."
+    },
+    {
+      question: "Why store metadata on IPFS?",
+      answer:
+        "Device images and metadata are significantly larger than blockchain storage is designed to handle. IPFS provides decentralized content-addressed storage while only immutable hashes are referenced on-chain."
+    }
+  ]
   },
   seismic: {
     id: 'seismic',
@@ -145,6 +211,28 @@ export const systemsData = {
         title: 'Tactical Rendering Engine', 
         content: 'Features magnitude-based color gradients, depth visualization, and temporal timeline playback executed through smooth WebGL camera orbit controls.' 
       }
-    ]
+    ],
+      decisions: [
+    {
+      question: "Why build a 3D globe instead of using a traditional map?",
+      answer:
+        "Earthquakes occur globally, and a flat map hides geographic context such as tectonic plate boundaries and antipodal activity. A 3D globe provides a more intuitive understanding of worldwide seismic patterns."
+    },
+    {
+      question: "Why consume live USGS feeds instead of static datasets?",
+      answer:
+        "Real-time seismic events transform the application from a visualization tool into a live monitoring platform. Streaming current earthquake data better demonstrates handling of continuously updating external sources."
+    },
+    {
+      question: "Why use React Three Fiber for visualization?",
+      answer:
+        "React Three Fiber combines the flexibility of Three.js with React's component model, making it easier to build interactive 3D interfaces while keeping rendering logic modular and maintainable."
+    },
+    {
+      question: "Why focus on visualization instead of prediction?",
+      answer:
+        "Reliable earthquake prediction remains an open scientific challenge. The project's goal is to improve situational awareness by transforming raw seismic feeds into clear, interactive visualizations that help users understand ongoing activity."
+    }
+  ]
   }
 };

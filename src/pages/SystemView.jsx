@@ -10,8 +10,6 @@ const SystemView = ({ systemId }) => {
       
       {/* Header Block */}
       <div className="border border-gray-700 bg-[#0a0a0a] p-6 md:p-8 mb-8 shadow-sm">
-        
-        {/* Responsive Flex Container: Stacks vertically on mobile, horizontally on md screens */}
         <div className="flex flex-col md:flex-row justify-between items-start gap-6 mb-6 border-b border-gray-700 pb-6">
           <div>
             <h1 className="text-3xl md:text-4xl font-bold tracking-widest mb-2 text-white">
@@ -58,8 +56,6 @@ const SystemView = ({ systemId }) => {
       <div className={`w-full border border-gray-800 bg-black mb-8 flex justify-center items-center relative overflow-hidden group ${
         data.media?.orientation === 'portrait' ? 'py-8' : ''
       }`}>
-        
-        {/* Fallback pattern if no media is loaded yet */}
         {!data.media?.url && (
           <div className="absolute inset-0 bg-[linear-gradient(rgba(0,255,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,255,0,0.02)_1px,transparent_1px)] bg-[size:20px_20px]"></div>
         )}
@@ -99,7 +95,7 @@ const SystemView = ({ systemId }) => {
         </p>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-8">
+      <div className="grid md:grid-cols-2 gap-8 mb-12">
         {data.engineering.map((item, idx) => (
           <div key={idx} className={`border-l-2 ${data.border} pl-6 bg-[#0a0a0a] p-4`}>
             <h4 className="text-white mb-2 text-sm uppercase tracking-wider">
@@ -111,6 +107,34 @@ const SystemView = ({ systemId }) => {
           </div>
         ))}
       </div>
+
+      {/* Architectural Decisions (Expandable) */}
+      {data.decisions && data.decisions.length > 0 && (
+        <div className="border border-gray-800 bg-[#0a0a0a]">
+          <details className="group marker:content-['']">
+            <summary className="flex justify-between items-center font-bold cursor-pointer list-none p-4 md:p-6 text-white uppercase tracking-widest border-b border-transparent group-open:border-gray-800 transition-colors hover:bg-[#111]">
+              <span>// ENGINEERING_DECISIONS</span>
+              <span className="transition-transform duration-300 group-open:rotate-180 text-gray-500">
+                <svg fill="none" height="20" shapeRendering="geometricPrecision" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" width="20"><path d="M6 9l6 6 6-6"></path></svg>
+              </span>
+            </summary>
+            
+            <div className="p-4 md:p-6 text-gray-400 text-sm flex flex-col gap-8 bg-black/50">
+              {data.decisions.map((decision, idx) => (
+                <div key={idx} className={`border-l-2 ${data.border} pl-5`}>
+                  <h4 className="text-white mb-3 tracking-wide">
+                    Q: {decision.question}
+                  </h4>
+                  <p className="leading-relaxed">
+                    {decision.answer}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </details>
+        </div>
+      )}
+
     </div>
   );
 };
