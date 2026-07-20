@@ -127,7 +127,7 @@ export const systemsData = {
     bg: 'bg-purple-500',
     hoverBg: 'hover:bg-purple-900/30',
     media: {
-      type: 'video',
+      type: 'image',
       url: '/assets/verifind_demo.gif',
       orientation: 'portrait'
     },
