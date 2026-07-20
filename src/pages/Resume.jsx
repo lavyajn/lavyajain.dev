@@ -23,7 +23,7 @@ const Resume = () => {
           </button>
           {/* Download PDF Action */}
           <a 
-            href="./assets/Lavya_Resume_July_26.pdf" 
+            href="./assets/Lavya_Resume_July_26_.pdf" 
             download
             className="px-4 py-2 text-xs border border-green-900 bg-green-900/20 hover:bg-green-900/40 text-green-500 transition-colors flex items-center gap-2"
           >
